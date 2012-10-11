@@ -8,19 +8,19 @@ options = {:search_scope => "app config extras db lib spec Gemfile", path: Dir.p
 option_parser = OptionParser.new do |opts|
   opts.banner = "Usage: [options]"
 
-  opts.on("-p", "--path PATH", "Specify path to rails project (MANDATORY)") do |path|
+  opts.on("-p", "--path PATH", "Specify path to git repo root or sub directory. By default it is working directory from which you call the command.") do |path|
     options[:path] = path
   end
-  opts.on("-f", "--from TIME", "Specify from date ex. '2012-10-29' (OPTIONAL)") do |time|
+  opts.on("-f", "--from TIME", "Specify from date ex. '2012-10-29'") do |time|
     options[:from] = time
   end
-  opts.on("-t", "--till TIME", "Specify till date ex. '2012-10-29 12:44:01' (OPTIONAL)") do |time|
+  opts.on("-t", "--till TIME", "Specify till date ex. '2012-10-29 12:44:01'") do |time|
     options[:till] = time
   end
   opts.on("-u", "--author AUTHOR", "Specify git author (OPTIONAL)") do |author|
     options[:author] = author
   end
-  opts.on("-s", "--searchscope DIRS", "Specify search scope for which to gather statistics, default: 'app config extras' (OPTIONAL)") do |search_scope|
+  opts.on("-s", "--searchscope DIRS", "Specify search scope for which to gather statistics, default: 'app config extras'") do |search_scope|
     options[:search_scope] = search_scope
   end
 
@@ -34,4 +34,4 @@ end
 option_parser.parse!
 
 statistics = GitLocTracker::Statistics.new(options)
-p statistics.print_statistics
+statistics.print_statistics
