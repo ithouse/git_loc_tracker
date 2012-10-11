@@ -1,0 +1,43 @@
+#!/usr/bin/env ruby
+
+require 'optparse'
+require 'git_loc_tracker'
+require "debugger"
+
+options = {:search_scope => "app config extras db lib spec Gemfile"}
+
+option_parser = OptionParser.new do |opts|
+  opts.banner = "Usage: [options]"
+
+  opts.on("-p", "--path PATH", "Specify path to rails project (MANDATORY)") do |path|
+    options[:path] = path
+  end
+  opts.on("-f", "--from TIME", "Specify from date ex. '2012-10-29' (OPTIONAL)") do |time|
+    options[:from] = time
+  end
+  opts.on("-t", "--till TIME", "Specify till date ex. '2012-10-29 12:44:01' (OPTIONAL)") do |time|
+    options[:till] = time
+  end
+  opts.on("-u", "--user USER", "Specify git user (OPTIONAL)") do |user|
+    options[:user] = user
+  end
+  opts.on("-s", "--searchscope DIRS", "Specify search scope for which to gather statistics, default: 'app config extras' (OPTIONAL)") do |search_scope|
+    options[:search_scope] = search_scope
+  end
+
+  opts.on_tail("-h", "--help", "Show this message") do
+    puts opts
+    exit
+  end
+
+
+end
+option_parser.parse!
+
+if options[:path].nil?
+  puts option_parser
+  raise OptionParser::MissingArgument
+end
+
+statistics = GitLocTracker::Statistics.new(options)
+p statistics.print_statistics
