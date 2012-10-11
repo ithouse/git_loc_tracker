@@ -19,8 +19,7 @@ Options
 
 Complex example
 ---------------
-`git-loc-tracker --path=path/to/git/repo --from="1 week ago"  
---till="1 hour ago" --author="Janis" --searchscope="app/controllers app/models"`
+*git-loc-tracker --path=path/to/git/repo --from="1 week ago" --till="1 hour ago" --author="Janis" --searchscope="app/controllers app/models"*
 
 Boring details
 ---------------
