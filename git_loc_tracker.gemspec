@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.summary     = %q{Counts new, deleted and modified lines in git repository with ability to pass various options}
   s.description = %q{Counts new, deleted and modified lines in git repository with ability to pass various options}
 
-  #s.rubyforge_project = "git_loc_tracker"
+  s.rubyforge_project = "git_loc_tracker"
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
