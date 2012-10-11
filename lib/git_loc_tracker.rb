@@ -11,7 +11,6 @@ module GitLocTracker
     attr_accessor :git_lines, :git_command
 
     def initialize options
-      debugger
       @git_command = GitLocTracker::CommandConstructor.new(options).git_command
     end
 
@@ -43,16 +42,16 @@ module GitLocTracker
     end
 
     def is_new?(line)
-      line.strip.gsub(GitCommandConstructor::NEW_CODE_REGEXP, "").size == 0
+      line.strip.gsub(GitLocTracker::CommandConstructor::NEW_CODE_REGEXP, "").size == 0
     end
 
     def is_deleted?(line)
-      line.strip.gsub(GitCommandConstructor::DELETED_CODE_REGEXP, "").size == 0
+      line.strip.gsub(GitLocTracker::CommandConstructor::DELETED_CODE_REGEXP, "").size == 0
     end
 
     def is_modified? line
-      line.strip.gsub(GitCommandConstructor::DELETED_CODE_REGEXP, "").size > 0 ||
-          line.strip.gsub(GitCommandConstructor::NEW_CODE_REGEXP, "").size > 0
+      line.strip.gsub(GitLocTracker::CommandConstructor::DELETED_CODE_REGEXP, "").size > 0 ||
+          line.strip.gsub(GitLocTracker::CommandConstructor::NEW_CODE_REGEXP, "").size > 0
     end
 
     def set_raw_git_lines
