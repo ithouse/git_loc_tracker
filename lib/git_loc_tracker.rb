@@ -7,18 +7,10 @@ module GitLocTracker
 
   class Statistics
 
-    attr_accessor :git_lines, :git_command, :line_parser
+    attr_accessor :git_command_options, :git_lines, :git_command, :line_parser
 
     def initialize options
-      @git_command = GitLocTracker::CommandConstructor.new(options).git_command
-    end
-
-    def git_lines
-      @git_lines ||= GitLocTracker::CommandExecutor.new(@git_command).git_lines
-    end
-
-    def line_parser line
-      GitLocTracker::LineParser.new(line)
+      @git_command_options = options
     end
 
     def new_line_count
@@ -45,6 +37,20 @@ module GitLocTracker
       puts "Deleted  lines: #{deleted_line_count}"
       puts "Modified lines: #{modified_line_count}"
       puts "********************************"
+    end
+
+    private
+
+    def git_command
+      @git_command ||= GitLocTracker::CommandConstructor.new(git_command_options).git_command
+    end
+
+    def git_lines
+      @git_lines ||= GitLocTracker::CommandExecutor.new(git_command).git_lines
+    end
+
+    def line_parser line
+      GitLocTracker::LineParser.new(line)
     end
 
   end

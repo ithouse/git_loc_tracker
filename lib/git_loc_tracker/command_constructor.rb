@@ -34,7 +34,7 @@ module GitLocTracker
     end
 
     def existing_search_scope
-      scope_parts = options[:search_scope].split(" ")
+      scope_parts = options[:search_scope] ? options[:search_scope].split(" ") : []
       existing_scope_dirs = scope_parts.select { |dir| File.exist?("#{options[:path]}/#{dir}") }
       existing_scope_dirs.empty? ? options[:path] : existing_scope_dirs.join(" ")
     end

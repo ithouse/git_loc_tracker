@@ -6,14 +6,6 @@ module GitLocTracker
       @line = line
     end
 
-    def line_size_without_deleted_code
-      line.strip.gsub(GitLocTracker::CommandConstructor::DELETED_CODE_REGEXP, "").size
-    end
-
-    def line_size_without_new_code
-      line.strip.gsub(GitLocTracker::CommandConstructor::NEW_CODE_REGEXP, "").size
-    end
-
     def is_new?
       line_size_without_new_code == 0
     end
@@ -25,5 +17,16 @@ module GitLocTracker
     def is_modified?
       !is_new? && !is_deleted?
     end
+
+    private
+
+    def line_size_without_deleted_code
+      line.strip.gsub(GitLocTracker::CommandConstructor::DELETED_CODE_REGEXP, "").size
+    end
+
+    def line_size_without_new_code
+      line.strip.gsub(GitLocTracker::CommandConstructor::NEW_CODE_REGEXP, "").size
+    end
+
   end
 end
